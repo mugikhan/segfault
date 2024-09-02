@@ -13,19 +13,7 @@ jobs:
       - name: Install SQLite3
         run: |
           brew install sqlite3
-          brew info sqlite3
-          echo 'export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"' >> /Users/runner/.bash_profile
-          pwd
           cp /opt/homebrew/opt/sqlite/bin/sqlite3 ./libsqlite3.dylib
-      - name: Update sqlite3 path
-        run: |
-          echo "PATH: $PATH"
-          echo export PATH="/opt/homebrew/opt/sqlite/bin:$PATH" >> $GITHUB_PATH
-          which sqlite3
-      - name: Debug Environment
-        run: |
-          echo "PATH: $PATH"
-          echo "SHELL: $SHELL"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.22.2
