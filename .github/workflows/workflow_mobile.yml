@@ -13,6 +13,7 @@ jobs:
       - name: Install SQLite3
         run: |
           brew install sqlite3
+          brew info sqlite3
       - name: Update sqlite3 path
         run: |
           echo "PATH: $PATH"
