@@ -13,20 +13,19 @@ jobs:
       - name: Install SQLite3
         run: |
           brew install sqlite3
-        shell: zsh
       - name: Update sqlite3 path
         run: |
-          echo 'export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"' >> ~/.zshrc
+          echo 'export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"' >> $GITHUB_PATH
           cat ~/.zshrc
           which sqlite3
-        shell: zsh
+      - name: Debug Environment
+        run: |
+          echo "PATH: $PATH"
+          echo "SHELL: $SHELL"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.22.2
           cache: true
       - run: flutter pub get
-        shell: zsh
       - run: dart ./scripts/init_powersync_core_binary.dart
-        shell: zsh
       - run: flutter test --dart-define SQLITE_BIN=$(which sqlite3)
-        shell: zsh
