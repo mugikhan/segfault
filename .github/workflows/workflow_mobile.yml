@@ -13,10 +13,10 @@ jobs:
       - name: Install SQLite3
         run: |
           brew install sqlite3
-          which brew
       - name: Update sqlite3 path
         run: |
-          echo export "PATH="/opt/homebrew/opt/sqlite/bin:$PATH" >> $GITHUB_PATH
+          echo "PATH: $PATH"
+          echo export PATH="/opt/homebrew/opt/sqlite/bin:$PATH" >> $GITHUB_PATH
           which sqlite3
       - name: Debug Environment
         run: |
