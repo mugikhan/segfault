@@ -2,9 +2,6 @@ name: Mobile tests
 
 on:
   push:
-    paths:
-      - components/mobile/**
-      - .github/workflows/workflow_mobile.yml
   workflow_dispatch:
 
 jobs:
@@ -16,7 +13,10 @@ jobs:
       - name: Install SQLite3
         run: |
           brew install sqlite3
-      - uses: actions/checkout@v2
+      - name: Update sqlite3 path
+        run: |
+          echo 'export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"' >> $GITHUB_PATH
+          which sqlite3
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.22.2

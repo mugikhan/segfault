@@ -28,12 +28,13 @@ class TestOpenFactory extends PowerSyncOpenFactory {
 
   @override
   CommonDatabase open(SqliteOpenOptions options) {
-    // if (sqliteBinPath.isEmpty) {
-    //   throw "SQLITE_BIN must be set and non-blank";
-    // }
+    if (sqliteBinPath.isEmpty) {
+      throw "SQLITE_BIN must be set and non-blank";
+    }
+    print(sqliteBinPath);
 
     sqlite_open.open.overrideFor(sqlite_open.OperatingSystem.macOS, () {
-      return DynamicLibrary.open('libsqlite3.dylib');
+      return DynamicLibrary.open(sqliteBinPath);
     });
     return super.open(options);
   }
