@@ -1,0 +1,26 @@
+name: Mobile tests
+
+on:
+  push:
+    paths:
+      - components/mobile/**
+      - .github/workflows/workflow_mobile.yml
+  workflow_dispatch:
+
+jobs:
+  harmonix-mobile:
+    name: Build and test harmonix_mobile
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SQLite3
+        run: |
+          brew install sqlite3
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.22.2
+          cache: true
+      - run: flutter pub get
+      - run: dart ./scripts/init_powersync_core_binary.dart
+      - run: flutter test --dart-define SQLITE_BIN=$(which sqlite3)
