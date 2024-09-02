@@ -15,7 +15,8 @@ jobs:
           brew install sqlite3
           brew info sqlite3
           echo 'export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"' >> /Users/runner/.bash_profile
-          which sqlite3
+          pwd
+          cp /opt/homebrew/opt/sqlite/bin/sqlite3 ./libsqlite3.dylib
       - name: Update sqlite3 path
         run: |
           echo "PATH: $PATH"
